@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Avleen 💖</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 30px 20px;
+      border-radius: 20px;
+      text-align: center;
+      color: white;
+      width: 90%;
+      max-width: 360px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.15em;
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      font-size: 1.1em;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .yes {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background-color: white;
+      color: #ff4d6d;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 60px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Avleen ❤️</h1>
+    <p>Will you be my Valentine?</p>
+
+    <div class="buttons">
+      <button class="yes" onclick="yesClicked()">YES 💕</button>
+      <button class="no" id="noBtn">No 😢</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const buttonsBox = document.querySelector(".buttons");
+
+    function moveNoButton() {
+      const boxRect = buttonsBox.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = boxRect.width - btnRect.width;
+      const maxY = boxRect.height - btnRect.height;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    // Mobile + desktop friendly
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("touchstart", moveNoButton);
+
+    function yesClicked() {
+      document.body.innerHTML = `
+        <div style="
+          text-align:center;
+          color:white;
+          padding:40px;
+        ">
+          <h1 style="font-size:2.5em;">YAY AVLEEN!!! 💖💖💖</h1>
+          <p style="font-size:1.2em;">You just made me the happiest person ever 🥰</p>
+          <p style="font-size:1.1em;">Happy Valentine’s Day 💘</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
