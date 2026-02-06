@@ -7,36 +7,38 @@
 
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: #f2f2f2;
       height: 100vh;
       margin: 0;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 30px 20px;
-      border-radius: 20px;
+      background: #ffffff;
+      padding: 32px 24px;
+      border-radius: 18px;
       text-align: center;
-      color: white;
       width: 90%;
       max-width: 360px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
       position: relative;
+      z-index: 2;
     }
 
     h1 {
-      font-size: 2.2em;
-      margin-bottom: 10px;
+      font-size: 2.1em;
+      margin-bottom: 8px;
+      color: #333;
     }
 
     p {
-      font-size: 1.15em;
-      margin-bottom: 25px;
+      font-size: 1.1em;
+      margin-bottom: 26px;
+      color: #555;
     }
 
     .buttons {
@@ -45,8 +47,8 @@
     }
 
     button {
-      font-size: 1.1em;
-      padding: 14px 28px;
+      font-size: 1.05em;
+      padding: 14px 30px;
       border: none;
       border-radius: 30px;
       cursor: pointer;
@@ -56,62 +58,139 @@
     .yes {
       background-color: #ff4d6d;
       color: white;
+      box-shadow: 0 6px 15px rgba(255,77,109,0.3);
     }
 
     .no {
-      background-color: white;
-      color: #ff4d6d;
+      background-color: #eeeeee;
+      color: #777;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
       top: 60px;
     }
+
+    /* Floating hearts (subtle) */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 18px;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+        opacity: 0.3;
+      }
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 5;
+    }
   </style>
 </head>
 
 <body>
+  <canvas id="confetti"></canvas>
+
   <div class="card">
     <h1>Avleen ❤️</h1>
     <p>Will you be my Valentine?</p>
 
     <div class="buttons">
       <button class="yes" onclick="yesClicked()">YES 💕</button>
-      <button class="no" id="noBtn">No 😢</button>
+      <button class="no" id="noBtn">No</button>
     </div>
   </div>
 
   <script>
+    /* Floating hearts (clean + slow) */
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (14 + Math.random() * 10) + "px";
+      heart.style.animationDuration = (7 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 11000);
+    }
+    setInterval(createHeart, 900);
+
+    /* Runaway No button + vibration */
     const noBtn = document.getElementById("noBtn");
     const buttonsBox = document.querySelector(".buttons");
 
     function moveNoButton() {
+      if (navigator.vibrate) navigator.vibrate(60);
+
       const boxRect = buttonsBox.getBoundingClientRect();
       const btnRect = noBtn.getBoundingClientRect();
 
-      const maxX = boxRect.width - btnRect.width;
-      const maxY = boxRect.height - btnRect.height;
-
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
+      const x = Math.random() * (boxRect.width - btnRect.width);
+      const y = Math.random() * (boxRect.height - btnRect.height);
 
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
     }
 
-    // Mobile + desktop friendly
     noBtn.addEventListener("mouseover", moveNoButton);
     noBtn.addEventListener("touchstart", moveNoButton);
 
+    /* Confetti */
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let confetti = [];
+
+    function createConfetti() {
+      confetti = [];
+      for (let i = 0; i < 120; i++) {
+        confetti.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          r: Math.random() * 5 + 3,
+          d: Math.random() * 10 + 10,
+          color: `hsl(${Math.random() * 360}, 80%, 65%)`
+        });
+      }
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetti.forEach(c => {
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+        ctx.fillStyle = c.color;
+        ctx.fill();
+        c.y += Math.cos(c.d) + 3;
+      });
+    }
+
     function yesClicked() {
+      createConfetti();
+      setInterval(drawConfetti, 16);
+
       document.body.innerHTML = `
-        <div style="
-          text-align:center;
-          color:white;
-          padding:40px;
-        ">
-          <h1 style="font-size:2.5em;">YAY AVLEEN!!! 💖💖💖</h1>
-          <p style="font-size:1.2em;">You just made me the happiest person ever 🥰</p>
-          <p style="font-size:1.1em;">Happy Valentine’s Day 💘</p>
+        <canvas id="confetti"></canvas>
+        <div style="text-align:center; padding:40px;">
+          <h1 style="font-size:2.4em; color:#333;">YAY AVLEEN 💖</h1>
+          <p style="font-size:1.15em; color:#555;">You just made me the happiest person ever 🥰</p>
+          <p style="font-size:1.1em; color:#777;">Happy Valentine’s Day</p>
         </div>
       `;
     }
