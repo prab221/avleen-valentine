@@ -181,19 +181,58 @@
       });
     }
 
-    function yesClicked() {
-      createConfetti();
-      setInterval(drawConfetti, 16);
+    <script>
+function yesClicked() {
+  createConfetti();
+  setInterval(drawConfetti, 16);
 
-      document.body.innerHTML = `
-        <canvas id="confetti"></canvas>
-        <div style="text-align:center; padding:40px;">
-          <h1 style="font-size:2.4em; color:#333;">YAYY U SAID YES💖</h1>
-          <p style="font-size:1.15em; color:#555;">I love u babyjaan</p>
-          <p style="font-size:1.1em; color:#777;">Happy Valentine’s Day💖💖</p>
-        </div>
-      `;
-    }
-  </script>
+  document.body.innerHTML = `
+    <canvas id="confetti"></canvas>
+
+    <div style="
+      min-height: 100vh;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    ">
+      <div style="
+        background: #fde2e8;
+        border-radius: 20px;
+        padding: 36px 28px;
+        max-width: 380px;
+        text-align: center;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      ">
+        <h1 style="
+          font-size: 2.3em;
+          color: #333;
+          margin-bottom: 16px;
+        ">
+          YAYY — you said YES 💖
+        </h1>
+
+        <p style="
+          font-size: 1.2em;
+          color: #555;
+          margin-bottom: 22px;
+          line-height: 1.5;
+        ">
+          I love you, babyjaan 🥰<br>
+          You make every day brighter just by being you.
+        </p>
+
+        <p style="
+          font-size: 1.1em;
+          color: #777;
+        ">
+          Happy Valentine’s Day 💖💖
+        </p>
+      </div>
+    </div>
+  `;
+}
+</script>
 </body>
 </html>
