@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Avleen 💖</title>
 
@@ -104,6 +104,7 @@
 <body>
   <canvas id="confetti"></canvas>
 
+  <!-- Main Card -->
   <div class="card">
     <h1>Avleen ❤️</h1>
     <p>Will you be my Valentine?</p>
@@ -115,7 +116,7 @@
   </div>
 
   <script>
-    /* Floating hearts (clean + slow) */
+    /* Floating hearts */
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -181,58 +182,58 @@
       });
     }
 
-    <script>
-function yesClicked() {
-  createConfetti();
-  setInterval(drawConfetti, 16);
+    /* YES screen */
+    function yesClicked() {
+      createConfetti();
+      setInterval(drawConfetti, 16);
 
-  document.body.innerHTML = `
-    <canvas id="confetti"></canvas>
+      document.body.innerHTML = `
+        <canvas id="confetti"></canvas>
 
-    <div style="
-      min-height: 100vh;
-      background: #f2f2f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    ">
-      <div style="
-        background: #fde2e8;
-        border-radius: 20px;
-        padding: 36px 28px;
-        max-width: 380px;
-        text-align: center;
-        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-      ">
-        <h1 style="
-          font-size: 2.3em;
-          color: #333;
-          margin-bottom: 16px;
+        <div style="
+          min-height: 100vh;
+          background: #f2f2f2;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
         ">
-          YAYY — you said YES 💖
-        </h1>
+          <div style="
+            background: #fde2e8;
+            border-radius: 20px;
+            padding: 36px 28px;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+          ">
+            <h1 style="
+              font-size: 2.3em;
+              color: #333;
+              margin-bottom: 16px;
+            ">
+              YAYY — you said YES 💖
+            </h1>
 
-        <p style="
-          font-size: 1.2em;
-          color: #555;
-          margin-bottom: 22px;
-          line-height: 1.5;
-        ">
-          I love you, babyjaan 🥰<br>
-          You make every day brighter just by being you.
-        </p>
+            <p style="
+              font-size: 1.2em;
+              color: #555;
+              margin-bottom: 22px;
+              line-height: 1.5;
+            ">
+              I love you, babyjaan 🥰<br>
+              You make every day brighter just by being you.
+            </p>
 
-        <p style="
-          font-size: 1.1em;
-          color: #777;
-        ">
-          Happy Valentine’s Day 💖💖
-        </p>
-      </div>
-    </div>
-  `;
-}
-</script>
+            <p style="
+              font-size: 1.1em;
+              color: #777;
+            ">
+              Happy Valentine’s Day 💖💖
+            </p>
+          </div>
+        </div>
+      `;
+    }
+  </script>
 </body>
 </html>
